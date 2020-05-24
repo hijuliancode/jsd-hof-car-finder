@@ -57,5 +57,11 @@ function mostrarAutos(autos) {
 }
 
 function filtrarAutos() {
-    console.log('Filtrar Autos')
+    const resultado = obtenerAutos().filter(filtrarMarca) // automaticamente se pasa un auto como parametro de filtrar marca
+    console.log(resultado)
+}
+function filtrarMarca(auto) {
+    if(datosBusqueda.marca) {
+        return auto.marca === datosBusqueda.marca
+    }
 }
