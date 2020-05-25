@@ -52,6 +52,18 @@ maximo.addEventListener('input', (e) => {
     datosBusqueda.maximo = Number(e.target.value)
     filtrarAutos()
 })
+puertas.addEventListener('input', (e) => {
+    datosBusqueda.puertas = e.target.value
+    filtrarAutos()
+})
+transmision.addEventListener('input', (e) => {
+    datosBusqueda.transmision = e.target.value
+    filtrarAutos()
+})
+color.addEventListener('input', (e) => {
+    datosBusqueda.color = e.target.value
+    filtrarAutos()
+})
 
 // Functions
 function obtenerAutos() {
@@ -79,6 +91,9 @@ function filtrarAutos() {
                       .filter(filtrarYear)
                       .filter(filtrarMinimo)
                       .filter(filtrarMaximo)
+                      .filter(filtrarPuertas)
+                      .filter(filtrarTransmision)
+                      .filter(filtrarColor)
 
     console.log('resultado', resultado)
     if (resultado.length) {
@@ -87,6 +102,7 @@ function filtrarAutos() {
         alert('No hay resultados')
     }
 }
+
 function filtrarMarca(auto) {
     if(datosBusqueda.marca) {
         return auto.marca === datosBusqueda.marca
@@ -111,6 +127,27 @@ function filtrarMinimo(auto) {
 function filtrarMaximo(auto) {
     if(datosBusqueda.maximo) {
         return auto.precio <= datosBusqueda.maximo
+    } else {
+        return auto;
+    }
+}
+function filtrarPuertas(auto) {
+    if(datosBusqueda.puertas) {
+        return auto.puertas === datosBusqueda.puertas
+    } else {
+        return auto;
+    }
+}
+function filtrarTransmision(auto) {
+    if(datosBusqueda.transmision) {
+        return auto.transmision === datosBusqueda.transmision
+    } else {
+        return auto;
+    }
+}
+function filtrarColor(auto) {
+    if(datosBusqueda.color) {
+        return auto.color === datosBusqueda.color
     } else {
         return auto;
     }
