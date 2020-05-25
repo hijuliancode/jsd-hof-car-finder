@@ -44,6 +44,14 @@ year.addEventListener('input', (e) => {
     datosBusqueda.year = Number(e.target.value)
     filtrarAutos()
 })
+minimo.addEventListener('input', (e) => {
+    datosBusqueda.minimo = Number(e.target.value)
+    filtrarAutos()
+})
+maximo.addEventListener('input', (e) => {
+    datosBusqueda.maximo = Number(e.target.value)
+    filtrarAutos()
+})
 
 // Functions
 function obtenerAutos() {
@@ -69,12 +77,14 @@ function filtrarAutos() {
     const resultado = obtenerAutos()
                       .filter(filtrarMarca)
                       .filter(filtrarYear)
-    console.log(resultado)
+                      .filter(filtrarMinimo)
+                      .filter(filtrarMaximo)
+
+    console.log('resultado', resultado)
     if (resultado.length) {
         mostrarAutos(resultado)
     } else {
-        mostrarAutos(autos);
-        console.error(new Error('No hay resultados'))
+        alert('No hay resultados')
     }
 }
 function filtrarMarca(auto) {
@@ -87,6 +97,20 @@ function filtrarMarca(auto) {
 function filtrarYear(auto) {
     if(datosBusqueda.year) {
         return auto.year === datosBusqueda.year
+    } else {
+        return auto;
+    }
+}
+function filtrarMinimo(auto) {
+    if(datosBusqueda.minimo) {
+        return auto.precio >= datosBusqueda.minimo
+    } else {
+        return auto;
+    }
+}
+function filtrarMaximo(auto) {
+    if(datosBusqueda.maximo) {
+        return auto.precio <= datosBusqueda.maximo
     } else {
         return auto;
     }
